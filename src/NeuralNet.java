@@ -3,7 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = 0.5;
+    private double learningRate = 1;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
@@ -19,21 +19,21 @@ public class NeuralNet {
         this.numLayers = numLayers;
         neurons = new Neuron[numLayers][];
 
-        //Initialize each Row except the last.
-        for (int x = 0; x < numLayers - 1; x++) {
+        //Initialize each Row except the first
+        for (int x = 1; x < numLayers; x++) {
             //initialize the row with appropriate length
-            neurons[x] = new Neuron[numInputs];
+            neurons[x] = new Neuron[numOutputs];
 
             //initialize each neuron in the array
-            for (int y = 0; y < numInputs; y++) {
-                neurons[x][y] = new Neuron(numInputs);
+            for (int y = 0; y < numOutputs; y++) {
+                neurons[x][y] = new Neuron(numOutputs);
             }
         }
 
-        //Initialize the Last Layer
-        neurons[numLayers -1] = new Neuron[numOutputs];
-        for (int y = 0; y < numOutputs; y++) {
-            neurons[numLayers - 1][y] = new Neuron(numInputs);
+        //Initialize the first layer
+        neurons[0] = new Neuron[numInputs];
+        for (int y = 0; y < numInputs; y++) {
+            neurons[0][y] = new Neuron(numInputs);
         }
     }
     
@@ -48,14 +48,24 @@ public class NeuralNet {
         for (int x = 0; x < numInputs; x++) {
             neurons[0][x].setInputs(inputs);
         }
-        
-        //Starting with the first layer, propagate outputs until conclusion is reached
-        for (int x = 1; x < numLayers; x++) {
+
+
+        //Getvalues of First Column
+        double[] previousOutputs = new double[numInputs];
+        for (int y = 0; y < neurons[0].length; y++) {
+            previousOutputs[y] = neurons[0][y].calculateOutput();
+        }
+        for (int y = 0; y < neurons[1].length; y++) {
+            neurons[1][y].setInputs(previousOutputs);
+        }
+
+        //Starting with the second layer, propagate outputs until conclusion is reached
+        for (int x = 2; x < numLayers; x++) {
             
             //Create an Array of the Previous Rows Inputs
-            double[] previousOutputs = new double[numInputs];
+            previousOutputs = new double[numOutputs];
             
-            for (int y = 0; y < neurons[x].length; y++) {
+            for (int y = 0; y < neurons[x-1].length; y++) {
                 previousOutputs[y] = neurons[x-1][y].calculateOutput();
             }
             
@@ -210,9 +220,6 @@ public class NeuralNet {
                 propegateChange(numLayers - 1, x, inputs, expected);
             }
             System.out.println("After Back Propegation #" + c + ": " + forwardPropegate(inputs, expected));
-            for (int x = 0; x < numOutputs; x++) {
-                propegateChange(numLayers - 1, x, inputs, expected);
-            }
         }
     }
 }
