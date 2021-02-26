@@ -3,7 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = 0.5;
+    private double learningRate = 100;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {

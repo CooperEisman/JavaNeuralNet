@@ -11,7 +11,7 @@ public class Neuron {
         this.numInputs = numInputs;
         inputs = new double[numInputs];
         weights  = new double[numInputs];
-        bias = 0.0;
+        bias = 1.0;
 
         //initialize values as random doubles
         for (int x = 0; x < numInputs; x++ ) {
@@ -32,7 +32,7 @@ public class Neuron {
         }
 
         //divide by amount to get average
-        output = (10*output)/((double)(numInputs));
+        output = (output)/((double)(numInputs));
 
         output = (1/( 1 + Math.pow(Math.E,(-1*output))));
 
