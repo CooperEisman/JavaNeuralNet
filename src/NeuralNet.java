@@ -3,7 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = 0.1;
+    private double learningRate = 1.5;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
@@ -186,7 +186,6 @@ public class NeuralNet {
             for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
 
             for(int x = 0; x < numOutputs; x++) {
-                System.out.println(x);
                 initialCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
                 weightChanger[x] = delta;
                 neurons[valX-1][x].setWeights(weightChanger);
