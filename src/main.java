@@ -1,7 +1,28 @@
 public class main {
 
     public static void main(String[] args) {
-        NeuralNet n = new NeuralNet(10,10,10);
+        int numInputs = 10;
+        int numOutputs = 5;
+        int numLayers = 10;
+
+
+        //Create a net
+        NeuralNet n = new NeuralNet(numInputs,numOutputs,numLayers);
         System.out.println("Initialization Complete");
+
+        //Generate an Array
+        double[] inputs = new double[numInputs];
+        for (int x = 0; x < inputs.length; x++ ) {
+            inputs[x] = Math.random();
+        }
+        System.out.println("Array Generation Complete");
+
+        //Calculate the Output
+        double[] outputs = n.calculate(inputs);
+
+        for(int x = 0; x < outputs.length; x++) {
+            System.out.println("Output " + x + ": " + outputs[x]);
+        }
+        System.out.println("Array Output Creation Complete");
     }
 }

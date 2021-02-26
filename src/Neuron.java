@@ -22,8 +22,8 @@ public class Neuron {
 
     //Calculate the Output
     public double calculateOutput() {
-        //Set output to bias
-        output = bias;
+        //Set output to 0
+        output = 0.0;
 
 
         //get the sum of all inputs and their weights
@@ -32,7 +32,10 @@ public class Neuron {
         }
 
         //divide by amount to get average
-        output = output/((double)(numInputs));
+        output = (output)/((double)(numInputs));
+
+        //Add Bias
+        output += bias;
 
         //return the output
         return output;

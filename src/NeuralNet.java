@@ -31,7 +31,7 @@ public class NeuralNet {
 
         //Initialize the Last Layer
         neurons[numLayers -1] = new Neuron[numOutputs];
-        for (int y = 0; y < numInputs; y++) {
+        for (int y = 0; y < numOutputs; y++) {
             neurons[numLayers - 1][y] = new Neuron(numInputs);
         }
     }
@@ -52,7 +52,7 @@ public class NeuralNet {
         for (int x = 1; x < numLayers; x++) {
             
             //Create an Array of the Previous Rows Inputs
-            double[] previousOutputs = new double[numOutputs];
+            double[] previousOutputs = new double[numInputs];
             
             for (int y = 0; y < neurons[x].length; y++) {
                 previousOutputs[y] = neurons[x-1][y].calculateOutput();
