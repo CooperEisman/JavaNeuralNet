@@ -150,4 +150,22 @@ public class NeuralNet {
     }
 
     //Get an array of outputs
+    private double[] forwardPropegateForOutputs(double[][] inputs) {
+
+        //Tracking variable
+        double[] outputs = new double[inputs.length];
+
+        //Train for Every Data Piece, Tracking Accuracy
+        for(int x = 0; x < inputs.length; x++) {
+            outputs[x] = getOutput(inputs[x]);
+        }
+
+        //Returns run-through divided by correct runs
+        return outputs;
+
+    }
+
+    private void editWeights() {
+
+    }
 }
