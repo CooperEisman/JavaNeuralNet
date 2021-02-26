@@ -32,7 +32,7 @@ public class main {
         System.out.println("Arrays Filled... Testing Running Now");
 
         //Calculate the Accuracy
-        System.out.println(n.forwardPropegate(image,expectedOutput));
+        n.backPropegate(image,expectedOutput, 7);
 
     }
 }

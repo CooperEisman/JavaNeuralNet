@@ -135,13 +135,13 @@ public class NeuralNet {
         }
 
         //Calculate Difference
-        for(int x = 0; x < expected.length; x++) {
+        for(int x = 0; x < calculated.length; x++) {
             cost[expected[x]] += (1 - calculated[x]);
 
             for(int y = 0; y < cost.length; y++) {
                 //if not the correct answer, calculate difference
                 if (y!=expected[x]) {
-                    cost[x] = (calculated[x]);
+                    cost[y] += (calculated[y]);
                 }
             }
         }
@@ -185,7 +185,8 @@ public class NeuralNet {
             double[] weightChanger = new double[numInputs];
             for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
 
-            for(int x = 0; x < numInputs; x++) {
+            for(int x = 0; x < numOutputs; x++) {
+                System.out.println(x);
                 initialCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
                 weightChanger[x] = delta;
                 neurons[valX-1][x].setWeights(weightChanger);
@@ -199,5 +200,19 @@ public class NeuralNet {
 
             //Make Changes to the Neuron
         neurons[valX][valY].setWeights(weightChanges);
+    }
+
+    public void backPropegate(double[][] inputs, int[] expected, int propegationRuns) {
+        System.out.println("Before First Backprop:" + forwardPropegate(inputs, expected));
+
+        for (int c = 0; c < numOutputs; c++) {
+            for (int x = 0; x < numOutputs; x++) {
+                propegateChange(numLayers - 1, x, inputs, expected);
+            }
+            System.out.println("After Back Propegation #" + c + ": " + forwardPropegate(inputs, expected));
+            for (int x = 0; x < numOutputs; x++) {
+                propegateChange(numLayers - 1, x, inputs, expected);
+            }
+        }
     }
 }
