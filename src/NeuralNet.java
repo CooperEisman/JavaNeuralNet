@@ -89,7 +89,7 @@ public class NeuralNet {
 
         //Train for Every Data Piece, Tracking Accuracy
         for(int x = 0; x < inputs.length; x++) {
-            System.out.println("Running Forward Propegation Pass #" + x);
+            //System.out.println("Running Forward Propegation Pass #" + x);
             if (getOutput(inputs[x]) == outputs[x]) {
                 correct++;
             }
