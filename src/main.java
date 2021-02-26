@@ -1,9 +1,9 @@
 public class main {
 
     public static void main(String[] args) {
-        int numInputs = 10;
-        int numOutputs = 5;
-        int numLayers = 10;
+        int numInputs = 10000;
+        int numOutputs = 60466176;
+        int numLayers = 100;
 
 
         //Create a net
