@@ -89,7 +89,7 @@ public class NeuralNet {
 
         //Train for Every Data Piece, Tracking Accuracy
         for(int x = 0; x < inputs.length; x++) {
-            System.out.println("Running Pass #" + x);
+            System.out.println("Running Forward Propegation Pass #" + x);
             if (getOutput(inputs[x]) == outputs[x]) {
                 correct++;
             }
@@ -122,7 +122,32 @@ public class NeuralNet {
     }
 
     //Accessor to change the learning rate
-    private void setLearningRate(double learningRate) {
+    public void setLearningRate(double learningRate) {
         this.learningRate = learningRate;
     }
+
+    //Get the cost function, as mapped in a double array
+    private double[] getCost(int[] expected, double[] calculated) {
+        //Create and Initialize Cost Array
+        double[] cost = new double[numOutputs];
+        for(int x = 0; x < cost.length; x++) {
+            cost[x] = 0;
+        }
+
+        //Calculate Difference
+        for(int x = 0; x < expected.length; x++) {
+            cost[expected[x]] += (1 - calculated[x]);
+
+            for(int y = 0; y < cost.length; y++) {
+                //if not the correct answer, calculate difference
+                if (y!=expected[x]) {
+                    cost[x] = (calculated[x]);
+                }
+            }
+        }
+
+        return cost;
+    }
+
+    //Get an array of outputs
 }
