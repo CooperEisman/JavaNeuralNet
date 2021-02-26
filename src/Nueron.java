@@ -38,8 +38,14 @@ public class Nueron {
         return output;
     }
 
-
-
-
-
+    //Method for Getting Input
+    public void setInputs(double[] inputs) {
+        //If there is a correct number of outputs, then set the inputs. Otherwise, terminate running
+        if (this.numInputs == inputs.length) {
+            this.inputs = inputs;
+        } else {
+            System.out.println("Expected " + numInputs + " inputs, received " + inputs.length + ". Process will halt.");
+            System.exit(-1);
+        }
+    }
 }
