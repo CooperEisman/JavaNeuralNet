@@ -29,9 +29,20 @@ public class Image {
         String s = "";
 
         for(int x = 0; x<bits.length;x++) {
-            for(int y = 0; y<bits.length;y++) {
+            for(int y = 0; y<bits[x].length;y++) {
 
+                if(bits[x][y] > 200) {
+                    s+="▓";
+                } else if(bits[x][y] > 100) {
+                    s+="▒";
+                } else if(bits[x][y] > 25) {
+                s+="░";
+                } else {
+                    s+=" ";
+                }
             }
+            s+= "\n";
         }
+        return s;
     }
 }

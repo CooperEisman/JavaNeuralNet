@@ -39,11 +39,14 @@ public class ImageParser {
 
 
         //Read Images Starting at the Top
-
+        int temp = 0;
+        int[][] image = new int[28][28];
         for (int x = 16; x < imageBytes.length - 784; x+=784) {
-            int[][] image = new int[28][28];
             for(int y = 0; y < 784; y++) {
-                image[y/28][y%28] = imageBytes[x+y];
+                temp = imageBytes[x+y];
+
+                if (temp < 0) {temp = temp*-1; temp +=127;}
+                image[y/28][y%28] = temp;
             }
 
             images[(x-16)/784] = new Image(image, 0);
@@ -53,5 +56,9 @@ public class ImageParser {
 
 
 
+    }
+
+    public Image getImage(int atValue) {
+        return images[atValue];
     }
 }

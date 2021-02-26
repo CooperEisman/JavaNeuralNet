@@ -26,6 +26,7 @@ public class main {
         System.out.println("Array Output Creation Complete");
 
 
-        ImageParser p = new ImageParser("./Resources/train-images.idx3-ubyte", "./Resources/train-labels.idx3-ubyte");
+        ImageParser p = new ImageParser("./Resources/train-images.idx3-ubyte", "./Resources/train-labels.idx1-ubyte");
+        System.out.println(p.getImage(100));
     }
 }
