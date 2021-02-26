@@ -17,7 +17,7 @@ public class ImageParser {
         this.dataFilePath = dataFilePath;
         dataFile = new File(dataFilePath);
 
-        images = new Image[60000];
+        images = new Image[59999];
 
         try {
             read();
@@ -65,5 +65,9 @@ public class ImageParser {
 
     public Image getImage(int atValue) {
         return images[atValue];
+    }
+
+    public int getLength() {
+        return images.length;
     }
 }

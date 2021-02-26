@@ -37,7 +37,7 @@ public class NeuralNet {
     }
     
     //Take Inputs and Calculate 
-    public double[] calculate(double[] inputs) {
+    private double[] calculate(double[] inputs) {
         //Check to see if length of inputs in valid. Terminate if invalid
         if (inputs.length != numInputs) {
             System.out.println("Net Expected " + numInputs + " inputs, received " + inputs.length + ". Process will halt.");
@@ -73,5 +73,50 @@ public class NeuralNet {
 
         //return the output
         return outputs;
+    }
+
+    //Train the Algorithim, returns accuracy
+    public double forwardPropegate(double[][] inputs, int[] outputs) {
+        //Check to see if input is valid, Terminate if invalid
+        if (inputs[0].length != numInputs) {
+            System.out.println("Training is Invalid, inputs or outputs do not match expected. Process fails.");
+            System.exit(-1);
+        }
+
+        //Tracking variable
+        int correct = 0;
+
+        //Train for Every Data Piece, Tracking Accuracy
+        for(int x = 0; x < inputs.length; x++) {
+            System.out.println("Running Pass #" + x);
+            if (getOutput(inputs[x]) == outputs[x]) {
+                correct++;
+            }
+        }
+
+        //Returns run-through divided by correct runs
+        return correct*1.0/inputs.length;
+
+    }
+
+    //Get the Output
+    public int getOutput(double[] inputs) {
+        //Safety is Checked in calculate()
+        //Get Array of Inputs
+        double[] calculated = calculate(inputs);
+
+        //Find the Greatest Output
+        int index = 0;
+        double maxValue = 0.0;
+
+        for(int x = 0; x < numOutputs; x++) {
+            if (calculated[x] > maxValue) {
+                index = x;
+                maxValue = calculated[index];
+            }
+        }
+
+        //return the index of the highest value
+        return index;
     }
 }
