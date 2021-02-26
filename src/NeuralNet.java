@@ -3,6 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
+    private double learningRate = 0.1;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
@@ -118,5 +119,10 @@ public class NeuralNet {
 
         //return the index of the highest value
         return index;
+    }
+
+    //Accessor to change the learning rate
+    private void setLearningRate(double learningRate) {
+        this.learningRate = learningRate;
     }
 }
