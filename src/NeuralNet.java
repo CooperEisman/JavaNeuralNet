@@ -3,7 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = 0.1;
+    private double learningRate = 0.5;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
@@ -136,12 +136,12 @@ public class NeuralNet {
 
         //Calculate Difference
         for(int x = 0; x < calculated.length; x++) {
-            cost[expected[x]] += (1 - calculated[x]);
+            cost[expected[x]] += Math.pow(1.0 - calculated[x],2.0)/2.0;
 
             for(int y = 0; y < cost.length; y++) {
                 //if not the correct answer, calculate difference
                 if (y!=expected[x]) {
-                    cost[y] += (calculated[y]);
+                    cost[y] += Math.pow(calculated[y], 2.0)/2.0;
                 }
             }
         }
@@ -181,7 +181,7 @@ public class NeuralNet {
             double[] weightChanges = new double[numInputs];
             double initialCost = 0.0;
             double finalCost = 0.0;
-            double delta = 1;
+            double delta = 0.5;
             double[] weightChanger = new double[numInputs];
             for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
 
@@ -195,7 +195,7 @@ public class NeuralNet {
                 weightChanger[x] = -delta;
                 neurons[valX-1][x].setWeights(weightChanger);
 
-                weightChanges[x] = learningRate*(getSlope(initialCost, finalCost, delta));
+                weightChanges[x] = learningRate*(-getSlope(initialCost, finalCost, delta));
             }
 
             //Make Changes to the Neuron
