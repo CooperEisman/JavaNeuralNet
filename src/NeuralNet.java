@@ -3,7 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = 1.5;
+    private double learningRate = 0.1;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
@@ -181,10 +181,11 @@ public class NeuralNet {
             double[] weightChanges = new double[numInputs];
             double initialCost = 0.0;
             double finalCost = 0.0;
-            double delta = 0.001;
+            double delta = 1;
             double[] weightChanger = new double[numInputs];
             for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
 
+            //Find the cost and determine best practice
             for(int x = 0; x < numOutputs; x++) {
                 initialCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
                 weightChanger[x] = delta;
@@ -204,7 +205,7 @@ public class NeuralNet {
     public void backPropegate(double[][] inputs, int[] expected, int propegationRuns) {
         System.out.println("Before First Backprop:" + forwardPropegate(inputs, expected));
 
-        for (int c = 0; c < numOutputs; c++) {
+        for (int c = 0; c < propegationRuns; c++) {
             for (int x = 0; x < numOutputs; x++) {
                 propegateChange(numLayers - 1, x, inputs, expected);
             }
