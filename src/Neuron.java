@@ -44,7 +44,7 @@ public class Neuron {
         if (this.numInputs == inputs.length) {
             this.inputs = inputs;
         } else {
-            System.out.println("Expected " + numInputs + " inputs, received " + inputs.length + ". Process will halt.");
+            System.out.println("Neuron Expected " + numInputs + " inputs, received " + inputs.length + ". Process will halt.");
             System.exit(-1);
         }
     }

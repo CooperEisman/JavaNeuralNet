@@ -1,7 +1,7 @@
 public class main {
 
     public static void main(String[] args) {
-        Neuron n = new Neuron(10);
-        System.out.println(n.calculateOutput());
+        NeuralNet n = new NeuralNet(10,10,10);
+        System.out.println("Initialization Complete");
     }
 }
