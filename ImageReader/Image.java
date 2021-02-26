@@ -43,6 +43,7 @@ public class Image {
             }
             s+= "\n";
         }
+        s+="The Value is: " + value;
         return s;
     }
 }

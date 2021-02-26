@@ -27,6 +27,6 @@ public class main {
 
 
         ImageParser p = new ImageParser("./Resources/train-images.idx3-ubyte", "./Resources/train-labels.idx1-ubyte");
-        System.out.println(p.getImage(100));
+        System.out.println(p.getImage(24));
     }
 }
