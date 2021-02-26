@@ -1,8 +1,8 @@
 public class main {
 
     public static void main(String[] args) {
-        int numInputs = 10000;
-        int numOutputs = 60466176;
+        int numInputs = 100;
+        int numOutputs = 100;
         int numLayers = 100;
 
 
@@ -24,5 +24,8 @@ public class main {
             System.out.println("Output " + x + ": " + outputs[x]);
         }
         System.out.println("Array Output Creation Complete");
+
+
+        ImageParser p = new ImageParser("./Resources/train-images.idx3-ubyte", "./Resources/train-labels.idx3-ubyte");
     }
 }
