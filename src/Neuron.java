@@ -53,4 +53,12 @@ public class Neuron {
             System.exit(-1);
         }
     }
+
+    public void setWeights(double[] weights) {
+        this.weights = weights;
+    }
+
+    public double[] getWeights() {
+        return weights;
+    }
 }
