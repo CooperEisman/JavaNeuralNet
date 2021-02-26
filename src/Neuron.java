@@ -32,7 +32,9 @@ public class Neuron {
         }
 
         //divide by amount to get average
-        output = (output)/((double)(numInputs));
+        output = (10*output)/((double)(numInputs));
+
+        output = (1/( 1 + Math.pow(Math.E,(-1*output))));
 
         //Add Bias
         output += bias;
