@@ -1,4 +1,4 @@
-public class Nueron {
+public class Neuron {
     private int numInputs;
     private double[] inputs;
     private double[] weights;
@@ -6,7 +6,7 @@ public class Nueron {
     private double output;
 
     //Initializer
-    public Nueron(int numInputs) {
+    public Neuron(int numInputs) {
         //Initialize instance vars
         this.numInputs = numInputs;
         inputs = new double[numInputs];
