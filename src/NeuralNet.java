@@ -165,7 +165,39 @@ public class NeuralNet {
 
     }
 
-    private void editWeights() {
+    //Gets the slope between two doubles
+    private double getSlope(double initial, double finalVal, double delta) {
+        return (initial-finalVal)/delta;
+    }
 
+    private void propegateChange(int valX, int valY, double[][] inputs, int[] expected) {
+            //Create an Array of the Previous Rows Inputs
+            double[] previousOutputs = new double[numInputs];
+            for (int y = 0; y < neurons[valX].length; y++) {
+                previousOutputs[y] = neurons[valX-1][y].calculateOutput();
+            }
+
+            //Find dC/dw, and make changes as such
+            double[] weightChanges = new double[numInputs];
+            double initialCost = 0.0;
+            double finalCost = 0.0;
+            double delta = 0.001;
+            double[] weightChanger = new double[numInputs];
+            for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
+
+            for(int x = 0; x < numInputs; x++) {
+                initialCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
+                weightChanger[x] = delta;
+                neurons[valX-1][x].setWeights(weightChanger);
+                finalCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
+
+                weightChanger[x] = -delta;
+                neurons[valX-1][x].setWeights(weightChanger);
+
+                weightChanges[x] = learningRate*(getSlope(initialCost, finalCost, delta));
+            }
+
+            //Make Changes to the Neuron
+        neurons[valX][valY].setWeights(weightChanges);
     }
 }

@@ -4,8 +4,8 @@ public class main {
         //Values
         int numInputs = 284;
         int numOutputs = 10;
-        int numLayers = 25;
-        int numRunsTrain = 1000;
+        int numLayers = 5;
+        int numRunsTrain = 100;
         System.out.println("Neural Net for Image->Numerical Recognition. Code by Cooper Eisman, Dataset from MNIST. Sourcing in Readme");
 
 

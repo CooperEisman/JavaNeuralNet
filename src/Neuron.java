@@ -55,10 +55,20 @@ public class Neuron {
     }
 
     public void setWeights(double[] weights) {
-        this.weights = weights;
+        for(int x = 0; x < weights.length; x++) {
+            this.weights[x] += weights[x];
+        }
     }
 
     public double[] getWeights() {
         return weights;
+    }
+
+    public double getBias() {
+        return bias;
+    }
+
+    public void setBias(double bias) {
+        this.bias = bias;
     }
 }
