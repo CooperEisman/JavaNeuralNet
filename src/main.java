@@ -5,8 +5,8 @@ public class main {
         int numInputs = 284;
         int numOutputs = 10;
         int numLayers = 3;
-        int numRunsTrain = 200;
-        int propegationRuns = 10;
+        int numRunsTrain = 1000;
+        int propegationRuns = 50;
         System.out.println("Neural Net for Image->Numerical Recognition. Code by Cooper Eisman, Dataset from MNIST. Sourcing in Readme");
 
 
@@ -34,6 +34,7 @@ public class main {
 
         //Calculate the Accuracy
         n.backPropegate(image,expectedOutput, propegationRuns);
+
 
     }
 }
