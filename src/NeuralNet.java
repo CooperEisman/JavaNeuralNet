@@ -3,7 +3,7 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = 100;
+    private double learningRate = -0.01;
     
     //Initializer
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
@@ -181,7 +181,7 @@ public class NeuralNet {
             double[] weightChanges = new double[numInputs];
             double initialCost = 0.0;
             double finalCost = 0.0;
-            double delta = 0.5;
+            double delta = 0.05;
             double[] weightChanger = new double[numInputs];
             for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
 
