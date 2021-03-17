@@ -3,9 +3,10 @@ public class NeuralNet {
     private int numInputs;
     private int numOutputs;
     private Neuron[][] neurons;
-    private double learningRate = -0.01;
-    
+    private double learningRate = 100;
+
     //Initializer
+    //Test
     public NeuralNet(int numInputs, int numOutputs, int numLayers) {
         //If the neural network is invalid, terminate the program
         if (!(((numInputs > 1) && (numLayers > 2)) && (numOutputs > 1))) {
@@ -36,8 +37,8 @@ public class NeuralNet {
             neurons[numLayers - 1][y] = new Neuron(numInputs);
         }
     }
-    
-    //Take Inputs and Calculate 
+
+    //Take Inputs and Calculate
     private double[] calculate(double[] inputs) {
         //Check to see if length of inputs in valid. Terminate if invalid
         if (inputs.length != numInputs) {
@@ -48,23 +49,23 @@ public class NeuralNet {
         for (int x = 0; x < numInputs; x++) {
             neurons[0][x].setInputs(inputs);
         }
-        
+
         //Starting with the first layer, propagate outputs until conclusion is reached
         for (int x = 1; x < numLayers; x++) {
-            
+
             //Create an Array of the Previous Rows Inputs
             double[] previousOutputs = new double[numInputs];
-            
+
             for (int y = 0; y < neurons[x].length; y++) {
                 previousOutputs[y] = neurons[x-1][y].calculateOutput();
             }
-            
+
             //Each Neuron Receives the Previous Rows Outputs
             for (int y = 0; y < neurons[x].length; y++) {
                 neurons[x][y].setInputs(previousOutputs);
             }
         }
-        
+
         //Generate Array of Outputs
         double[] outputs = new double[numOutputs];
 
@@ -171,34 +172,34 @@ public class NeuralNet {
     }
 
     private void propegateChange(int valX, int valY, double[][] inputs, int[] expected) {
-            //Create an Array of the Previous Rows Inputs
-            double[] previousOutputs = new double[numInputs];
-            for (int y = 0; y < neurons[valX].length; y++) {
-                previousOutputs[y] = neurons[valX-1][y].calculateOutput();
-            }
+        //Create an Array of the Previous Rows Inputs
+        double[] previousOutputs = new double[numInputs];
+        for (int y = 0; y < neurons[valX].length; y++) {
+            previousOutputs[y] = neurons[valX-1][y].calculateOutput();
+        }
 
-            //Find dC/dw, and make changes as such
-            double[] weightChanges = new double[numInputs];
-            double initialCost = 0.0;
-            double finalCost = 0.0;
-            double delta = 0.05;
-            double[] weightChanger = new double[numInputs];
-            for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
+        //Find dC/dw, and make changes as such
+        double[] weightChanges = new double[numInputs];
+        double initialCost = 0.0;
+        double finalCost = 0.0;
+        double delta = 0.5;
+        double[] weightChanger = new double[numInputs];
+        for(int x = 0; x < numInputs; x++) {weightChanger[x]=0;}
 
-            //Find the cost and determine best practice
-            for(int x = 0; x < numOutputs; x++) {
-                initialCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
-                weightChanger[x] = delta;
-                neurons[valX-1][x].setWeights(weightChanger);
-                finalCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
+        //Find the cost and determine best practice
+        for(int x = 0; x < numOutputs; x++) {
+            initialCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
+            weightChanger[x] = delta;
+            neurons[valX-1][x].setWeights(weightChanger);
+            finalCost = getCost(expected, forwardPropegateForOutputs(inputs))[x];
 
-                weightChanger[x] = -delta;
-                neurons[valX-1][x].setWeights(weightChanger);
+            weightChanger[x] = -delta;
+            neurons[valX-1][x].setWeights(weightChanger);
 
-                weightChanges[x] = learningRate*(-getSlope(initialCost, finalCost, delta));
-            }
+            weightChanges[x] = learningRate*(-getSlope(initialCost, finalCost, delta));
+        }
 
-            //Make Changes to the Neuron
+        //Make Changes to the Neuron
         neurons[valX][valY].setWeights(weightChanges);
     }
 

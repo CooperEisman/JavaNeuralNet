@@ -31,11 +31,11 @@ public class Image {
         for(int x = 0; x<bits.length;x++) {
             for(int y = 0; y<bits[x].length;y++) {
 
-                if(bits[x][y] > 200) {
+                if(bits[x][y] > 220) {
                     s+="▓";
-                } else if(bits[x][y] > 100) {
+                } else if(bits[x][y] > 140) {
                     s+="▒";
-                } else if(bits[x][y] > 25) {
+                } else if(bits[x][y] > 65) {
                 s+="░";
                 } else {
                     s+=" ";
